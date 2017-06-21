@@ -33,12 +33,18 @@ function randomPassword(length){
 
 driver.get('http://digitalrenter.com/login');
 
- for (var i = 0; i < 50 ; i++) {
+ for (var i = 0; i < 20 ; i++) {
  	var username = randomUsername(6);
  	var password = randomPassword(6);
  	driver.findElement(By.name('identity')).clear();
  	driver.findElement(By.name('identity')).sendKeys(username);
 	driver.findElement(By.name('password')).sendKeys(password);
-	driver.findElement(By.className('btn-primary')).click();	
+	driver.findElement(By.className('btn-primary')).click();
+	if (i == 10) {
+		driver.findElement(By.name('identity')).clear();
+ 		driver.findElement(By.name('identity')).sendKeys("bot@localhost.com");
+		driver.findElement(By.name('password')).sendKeys("password");
+		driver.findElement(By.className('btn-primary')).click();
+	}	
  }
 driver.quit();
