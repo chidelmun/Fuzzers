@@ -21,23 +21,24 @@ function randomUsername(length){
     return username;
 }
 
+function randomPassword(length){
+	var chars = "abcdefghijklmnopqrstuvwxyz_ABCDEFGHIJKLMNOP1234567890";
+    var password = "";
+    for (var x = 0; x < length; x++) {
+        var i = Math.floor(Math.random() * chars.length);
+        password += chars.charAt(i);
+    }
+    return password;
+}
+
 driver.get('http://digitalrenter.com/login');
 
- for (var i = 0; i < 20 ; i++) {
+ for (var i = 0; i < 50 ; i++) {
+ 	var username = randomUsername(6);
+ 	var password = randomPassword(6);
  	driver.findElement(By.name('identity')).clear();
- 	driver.findElement(By.name('identity')).sendKeys(i);
-	driver.findElement(By.name('password')).sendKeys(i);
-	driver.findElement(By.className('btn-primary')).click();
-	if (i==18) {
-		driver.findElement(By.name('user')).sendKeys('admin@localhost.com');
-		driver.findElement(By.name('pass')).sendKeys('admin');
-		driver.findElement(By.className('btn-primary')).click();
-	}
-	
+ 	driver.findElement(By.name('identity')).sendKeys(username);
+	driver.findElement(By.name('password')).sendKeys(password);
+	driver.findElement(By.className('btn-primary')).click();	
  }
-
-driver.findElement(By.name('user')).sendKeys('root');
-driver.findElement(By.name('pass')).sendKeys('root@localhost.com');
-driver.findElement(By.name('login')).click();
-driver.wait(until.titleIs('webdriver - Google Search'), 5000);
 driver.quit();
