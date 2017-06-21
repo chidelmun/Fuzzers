@@ -37,26 +37,28 @@ function randomEmail(length){
         var i = Math.floor(Math.random() * chars.length);
         email += chars.charAt(i);
     }
-    return username + "@ubresources.com";
+    return username + "@osirisbotfuzzers.com";
 }
 
-
-
-
-
-driver.get('http://ubresources.com/join');
-for(var i=0 ; i< 2 ; i++){
-var username = randomUsername(8);
-driver.findElement(By.name('username')).sendKeys(username);
-console.log(username);
-var email = randomEmail(6);
-driver.findElement(By.name('email')).sendKeys(email);
-console.log(email);
-var password = randomPassword(8);										// Generate random password
-driver.findElement(By.name('password')).sendKeys(password);
-console.log(password);
-driver.findElement(By.name('password_confirmation')).sendKeys(password);
-driver.findElement(By.id('create-account')).click();
-}
-driver.wait(until.titleIs('webdriver - Google Search'), 5000);
-driver.quit();
+ 
+	for(var i=0 ; i< 2 ; i++){
+		driver.get('http://ubresources.com/join');
+		var username = randomUsername(8);
+		driver.findElement(By.name('username')).sendKeys(username);
+		console.log(username);
+		var email = randomEmail(6);
+		driver.findElement(By.name('email')).sendKeys(email);
+		console.log(email);
+		var password = randomPassword(8);										// Generate random password
+		driver.findElement(By.name('password')).sendKeys(password);
+		console.log(password);
+		driver.findElement(By.name('password_confirmation')).sendKeys(password);
+		driver.findElement(By.id('create-account')).click();
+		var currentUrl = driver.getCurrentUrl();
+		driver.get(currentUrl);
+		console.log(currentUrl);
+		driver.findElement(By.linkText('Log Out')).click();
+		driver.quit();
+	}
+ 
+ 
